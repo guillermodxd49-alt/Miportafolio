@@ -4,12 +4,12 @@
   PORTFOLIO PERSONAL — index.html
   ============================================================
   CAMBIOS RÁPIDOS (busca con Ctrl+F):
-  [TU GITHUB AQUÍ]         -> tu GitHub (si lo tenés)
   Número de WhatsApp        -> +54 9 3764 589570 (wa.me/5493764589570)
   assets/*                  -> reemplaza por tus propias imágenes
 
   Estructura de archivos (todos juntos en la misma carpeta):
   index.html | styles.css | script.js
+  assets/mi-logo.jpg
   assets/soundheritage-logo.jpg
   assets/soundheritage-dashboard.png
   assets/soundheritage-admin-clientes.png
@@ -41,7 +41,7 @@
   <meta name="theme-color" content="#f7f5f3">
 
   <!-- Icono de pestaña (no necesitas archivo extra) -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0d0f'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='36' font-weight='bold' text-anchor='middle' fill='%23e63946'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/jpeg" href="assets/mi-logo.jpg">
 
   <!-- ===== FUENTES (único recurso externo permitido) ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,7 +63,7 @@
     <div class="container header-inner">
 
       <a class="brand" href="#inicio">
-        <span class="brand-mark" aria-hidden="true">L</span>
+        <span class="brand-mark" aria-hidden="true"><img src="assets/mi-logo.jpg" alt="" width="512" height="512"></span>
         <!-- Texto corto para el menú. El nombre completo está en el Hero. -->
         <span class="brand-name">Leiva Tiago Guillermo</span>
       </a>
@@ -321,7 +321,7 @@
     <div class="container footer-inner">
       <div>
         <a class="brand" href="#inicio">
-          <span class="brand-mark" aria-hidden="true">L</span>
+          <span class="brand-mark" aria-hidden="true"><img src="assets/mi-logo.jpg" alt="" width="512" height="512"></span>
           <span class="brand-name">Leiva Tiago Guillermo</span>
         </a>
         <p class="footer-texto">Desarrollo web y sistemas internos · Posadas, Argentina</p>
@@ -331,7 +331,7 @@
         <h2 class="footer-titulo">Encontrame en</h2>
         <ul class="redes">
           <li><a href="https://www.linkedin.com/in/tiago-guillermo-leiva/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="#" data-placeholder="GitHub">GitHub <span>[TU LINK AQUÍ]</span></a></li>
+          <li><a href="https://github.com/guishealfa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           <li><a href="https://www.instagram.com/gsesion_12?hvrq=Y3lndjFzcjg1aWJh" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         </ul>
         <p class="form-estado" id="footer-estado" role="status"></p>
