@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  PORTFOLIO PERSONAL — index.html
+  ============================================================
+  CAMBIOS RÁPIDOS (busca con Ctrl+F):
+  [TU PROFESIÓN AQUÍ]       -> tu profesión real
+  [TU LINKEDIN / GITHUB...] -> tus redes sociales
+  Número de WhatsApp        -> +54 9 3764 589570 (wa.me/5493764589570)
+  assets/*.png              -> reemplaza por tus propias imágenes
+
+  Estructura de archivos (todos juntos en la misma carpeta):
+  index.html | styles.css | script.js
+  assets/soundheritage-logo.png
+  assets/soundheritage-dashboard.png
+  assets/soundheritage-admin-clientes.png
+  assets/soundheritage-admin-empleados.png
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===== SEO BÁSICO: cambia estos textos por los tuyos ===== -->
+  <title>Leiva Tiago Guillermo y Santino Nahuel Gall | Desarrollo web y sistemas internos</title>
+  <meta name="description" content="Portfolio de desarrollo web y sistemas internos. Sitios web y herramientas de gestión construidas con Laravel, PHP, Filament, MySQL, HTML, CSS y JavaScript. Ubicado en Posadas, Argentina.">
+  <meta name="robots" content="index, follow">
+  <!-- Si publicas con GitHub Pages/Netlify, reemplaza esta URL por la real: -->
+  <!-- <link rel="canonical" href="https://TU-USUARIO.github.io/TU-REPOSITORIO/"> -->
+
+  <!-- ===== OPEN GRAPH / REDES SOCIALES ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="Portfolio — Leiva &amp; Gall">
+  <meta property="og:title" content="Leiva Tiago Guillermo | Portfolio">
+  <meta property="og:description" content="Desarrollo de sitios web y sistemas internos con Laravel, PHP, Filament y MySQL.">
+  <meta property="og:url" content="[URL_DE_TU_WEB_AQUÍ]">
+  <meta property="og:image" content="[URL_DE_TU_IMAGEN_AQUÍ]">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Color de la barra del navegador (lo actualiza script.js según el tema) -->
+  <meta name="theme-color" content="#f7f5f3">
+
+  <!-- Icono de pestaña (no necesitas archivo extra) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0d0f'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='36' font-weight='bold' text-anchor='middle' fill='%23e63946'%3EL%3C/text%3E%3C/svg%3E">
+
+  <!-- ===== FUENTES (único recurso externo permitido) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- Enlace de acceso: aparece al presionar Tab -->
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- ============================================================
+       1. ENCABEZADO + NAVEGACIÓN FIJA
+       ============================================================ -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+
+      <a class="brand" href="#inicio">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <!-- Texto corto para el menú. El nombre completo está en el Hero. -->
+        <span class="brand-name">Leiva &amp; Gall</span>
+      </a>
+
+      <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#trabajos">Trabajos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-acciones">
+        <!-- Botón de tema: el texto visible cambia con JS -->
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button"
+                aria-pressed="false" aria-label="Activar modo oscuro" title="Cambiar tema">
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+          </svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+          </svg>
+        </button>
+
+        <!-- Menú hamburguesa: solo se ve en pantallas pequeñas -->
+        <button class="icon-btn menu-toggle" id="menu-toggle" type="button"
+                aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">
+          <span class="menu-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ============================================================
+         2. HERO
+         ============================================================ -->
+    <section class="hero section" id="inicio" aria-labelledby="hero-titulo">
+      <div class="container hero-grid">
+
+        <div class="hero-texto reveal">
+          <p class="eyebrow"><span class="punto" aria-hidden="true"></span> Hola, soy</p>
+
+          <!-- Nombre tal como lo enviaste. Si son dos personas, ajusta aquí. -->
+          <h1 id="hero-titulo">Leiva Tiago Guillermo <span class="hero-y">y</span> Santino Nahuel Gall</h1>
+
+          <p class="hero-profesion">
+            <!-- CAMBIAR: tu profesión exacta -->
+            [TU PROFESIÓN AQUÍ] · Desarrollo web y sistemas internos
+          </p>
+
+          <p class="hero-frase">
+            Creo sitios web y herramientas de gestión que hacen más simple el trabajo
+            de las personas, combinando diseño cuidado con código que funciona.
+          </p>
+
+          <div class="hero-acciones">
+            <a class="btn btn-primary" href="#trabajos">Ver mis trabajos</a>
+            <a class="btn btn-outline" href="#contacto">Hablemos</a>
+            <!-- Botón directo a WhatsApp (mensaje ya preparado) -->
+            <a class="btn btn-whatsapp" href="https://wa.me/5493764589570?text=Hola%2C%20quiero%20consultarte%20sobre%20un%20proyecto"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Escribirme por WhatsApp (se abre en una pestaña nueva)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12.04 2a10 10 0 0 0-8.6 15.04L2 22l5.1-1.4A10 10 0 1 0 12.04 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3 .79.8-2.93-.2-.31a8.2 8.2 0 1 1 6.88 3.77zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8-.23-.08-.4-.12-.57.12-.17.25-.65.8-.79.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.57-1.37-.78-1.88-.2-.5-.41-.43-.57-.44h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.78 2.71 4.31 3.8.6.26 1.07.42 1.44.54.6.19 1.15.16 1.58.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.28z"></path>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+
+          <ul class="hero-datos" aria-label="Datos principales">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Posadas, Argentina
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 4h6l2 5-3 2a12 12 0 0 0 4 4l2-3 5 2v6a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"></path>
+              </svg>
+              3764-589570
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. SOBRE MÍ
+         ============================================================ -->
+    <section class="section section-alt" id="sobre-mi" aria-labelledby="sobre-titulo">
+      <div class="container sobre-grid">
+
+        <div class="reveal">
+          <p class="eyebrow">Un poco sobre mí</p>
+          <h2 class="section-titulo" id="sobre-titulo">Sobre mí</h2>
+          <p class="section-bajada">
+            Soy desarrollador web, vivo en <strong>Posadas, Argentina</strong> y trabajo
+            de forma remota con clientes de cualquier lugar.
+          </p>
+          <p>
+            Tengo experiencia previa realizando webs y conexiones con sistemas de gestión
+            interna; me especializo en esas dos áreas principales. Soy una persona
+            comprometida con su trabajo que siempre trata de brindar lo mejor para cada cliente.
+          </p>
+          <!-- OPCIONAL: agrega aquí tus años de experiencia, estudios o cursos. -->
+        </div>
+
+        <div class="sobre-tarjetas reveal">
+          <article class="info-card">
+            <span class="info-icono" aria-hidden="true">01</span>
+            <h3>Sitios web</h3>
+            <p>Diseño y desarrollo de páginas adaptadas a móvil, con HTML, CSS, JavaScript, PHP y Laravel.</p>
+          </article>
+          <article class="info-card">
+            <span class="info-icono" aria-hidden="true">02</span>
+            <h3>Sistemas internos</h3>
+            <p>Paneles de gestión y conexiones con bases de datos MySQL usando Laravel y Filament.</p>
+          </article>
+          <article class="info-card">
+            <span class="info-icono" aria-hidden="true">03</span>
+            <h3>Compromiso</h3>
+            <p>Comunicación clara, seguimiento del trabajo y atención al detalle en cada entrega.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. MIS TRABAJOS
+         ============================================================ -->
+    <section class="section" id="trabajos" aria-labelledby="trabajos-titulo">
+      <div class="container">
+
+        <header class="section-cabecera reveal">
+          <div>
+            <p class="eyebrow">Lo que hago</p>
+            <h2 class="section-titulo" id="trabajos-titulo">Mis trabajos</h2>
+          </div>
+          <p class="section-bajada">Proyectos web y sistemas internos desarrollados con tecnologías del stack PHP/Laravel.</p>
+        </header>
+
+        <div class="proyectos-grid">
+
+          <!-- ===== PROYECTO 1: sitio web de Sound Heritage ===== -->
+          <article class="proyecto-card reveal">
+            <div class="proyecto-img proyecto-img--logo">
+              <img src="assets/soundheritage-logo.png" alt="Logo de Sound Heritage" loading="lazy" decoding="async" width="260" height="70">
+            </div>
+            <div class="proyecto-cuerpo">
+              <p class="proyecto-tipo">Sitio web</p>
+              <h3>Sitio web de Sound Heritage</h3>
+              <p>Desarrollo de sitio web con PHP y Laravel, HTML, CSS y JavaScript, usando MySQL como base de datos.</p>
+              <ul class="tags" aria-label="Tecnologías utilizadas">
+                <li>Laravel</li><li>PHP</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>MySQL</li>
+              </ul>
+              <a class="btn btn-small" href="https://soundheritage.duckdns.org/" target="_blank" rel="noopener noreferrer"
+                 aria-label="Ver proyecto: Sitio web de Sound Heritage (se abre en pestaña nueva)">
+                Ver proyecto <span class="sr-only">(se abre en una pestaña nueva)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- ===== PROYECTO 2: sistema interno (3 capturas reales) ===== -->
+          <article class="proyecto-card reveal">
+            <div class="proyecto-img proyecto-galeria">
+              <img src="assets/soundheritage-admin-clientes.png" alt="Listado del panel de administración de Sound Heritage" loading="lazy" decoding="async" width="1366" height="691">
+              <img src="assets/soundheritage-dashboard.png" alt="Panel de escritorio con métricas y ventas del sistema interno" loading="lazy" decoding="async" width="1364" height="651">
+              <img src="assets/soundheritage-admin-empleados.png" alt="Listado de empleados del sistema interno" loading="lazy" decoding="async" width="1366" height="651">
+            </div>
+            <div class="proyecto-cuerpo">
+              <p class="proyecto-tipo">Sistema interno</p>
+              <h3>Panel de administración</h3>
+              <p>Sistema interno de gestión implementado con Laravel y Filament, conectado a MySQL.</p>
+              <ul class="tags" aria-label="Tecnologías utilizadas">
+                <li>Laravel</li><li>Filament</li><li>MySQL</li>
+              </ul>
+              <!-- Nota: este enlace puede pedir usuario y contraseña. -->
+              <a class="btn btn-small" href="https://soundheritage.duckdns.org/admin/customers" target="_blank" rel="noopener noreferrer"
+                 aria-label="Ver proyecto: Panel de administración (se abre en pestaña nueva)">
+                Ver proyecto <span class="sr-only">(se abre en una pestaña nueva)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. CONTACTO
+         ============================================================ -->
+    <section class="section section-alt" id="contacto" aria-labelledby="contacto-titulo">
+      <div class="container contacto-grid">
+
+        <div class="reveal">
+          <p class="eyebrow">Hablemos</p>
+          <h2 class="section-titulo" id="contacto-titulo">Contacto</h2>
+          <p class="section-bajada">¿Tenés un proyecto en mente? Escribime y lo conversamos.</p>
+
+          <ul class="contacto-lista">
+            <li>
+              <span class="contacto-icono" aria-hidden="true">@</span>
+              <div>
+                <span>Correo electrónico</span>
+                <a href="mailto:guillermosesion12@gmail.com">guillermosesion12@gmail.com</a>
+              </div>
+            </li>
+            <li>
+              <span class="contacto-icono" aria-hidden="true">☎</span>
+              <div>
+                <span>Teléfono / WhatsApp</span>
+                <!-- Formato internacional argentino: +54 9 3764 589570 -->
+                <a href="tel:+5493764589570">3764-589570</a>
+              </div>
+            </li>
+            <li>
+              <span class="contacto-icono" aria-hidden="true">⌖</span>
+              <div><span>Ubicación</span><strong>Posadas, Argentina</strong></div>
+            </li>
+          </ul>
+
+          <!-- Botón directo a WhatsApp dentro de Contacto -->
+          <a class="btn btn-whatsapp btn-contacto-whatsapp"
+             href="https://wa.me/5493764589570?text=Hola%2C%20quiero%20consultarte%20sobre%20un%20proyecto"
+             target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2a10 10 0 0 0-8.6 15.04L2 22l5.1-1.4A10 10 0 1 0 12.04 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3 .79.8-2.93-.2-.31a8.2 8.2 0 1 1 6.88 3.77zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8-.23-.08-.4-.12-.57.12-.17.25-.65.8-.79.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.57-1.37-.78-1.88-.2-.5-.41-.43-.57-.44h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.78 2.71 4.31 3.8.6.26 1.07.42 1.44.54.6.19 1.15.16 1.58.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.28z"></path>
+            </svg>
+            Escribime por WhatsApp
+          </a>
+        </div>
+
+        <form class="formulario reveal" id="form-contacto"
+              action="mailto:guillermosesion12@gmail.com" method="post" enctype="text/plain">
+          <h3>Enviame un mensaje</h3>
+          <p class="form-nota">Se abrirá tu aplicación de correo con el mensaje ya preparado.</p>
+
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required maxlength="80" placeholder="Tu nombre">
+          </div>
+
+          <div class="campo">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required maxlength="120" placeholder="tu@email.com">
+          </div>
+
+          <div class="campo">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required maxlength="1500" placeholder="Contame sobre tu proyecto..."></textarea>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Enviar mensaje</button>
+          <p class="form-estado" id="form-estado" role="status"></p>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       6. PIE DE PÁGINA
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <a class="brand" href="#inicio">
+          <span class="brand-mark" aria-hidden="true">L</span>
+          <span class="brand-name">Leiva &amp; Gall</span>
+        </a>
+        <p class="footer-texto">Desarrollo web y sistemas internos · Posadas, Argentina</p>
+      </div>
+
+      <div>
+        <!-- CAMBIAR: reemplaza href="#" por tus URLs y elimina data-placeholder -->
+        <h2 class="footer-titulo">Encontrame en</h2>
+        <ul class="redes">
+          <li><a href="#" data-placeholder="LinkedIn">LinkedIn <span>[TU LINK AQUÍ]</span></a></li>
+          <li><a href="#" data-placeholder="GitHub">GitHub <span>[TU LINK AQUÍ]</span></a></li>
+          <li><a href="#" data-placeholder="Instagram">Instagram <span>[TU LINK AQUÍ]</span></a></li>
+        </ul>
+        <p class="form-estado" id="footer-estado" role="status"></p>
+      </div>
+
+      <div class="footer-final">
+        <p>© <span id="anio">2026</span> Leiva Tiago Guillermo y Santino Nahuel Gall</p>
+        <a href="#top">Volver arriba ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp: siempre accesible desde cualquier sección -->
+  <a class="whatsapp-flotante"
+     href="https://wa.me/5493764589570?text=Hola%2C%20quiero%20consultarte%20sobre%20un%20proyecto"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Abrir chat de WhatsApp" title="Escribime por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12.04 2a10 10 0 0 0-8.6 15.04L2 22l5.1-1.4A10 10 0 1 0 12.04 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3 .79.8-2.93-.2-.31a8.2 8.2 0 1 1 6.88 3.77zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8-.23-.08-.4-.12-.57.12-.17.25-.65.8-.79.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.57-1.37-.78-1.88-.2-.5-.41-.43-.57-.44h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.78 2.71 4.31 3.8.6.26 1.07.42 1.44.54.6.19 1.15.16 1.58.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.28z"></path>
+    </svg>
+    <span class="sr-only">Abrir chat de WhatsApp</span>
+  </a>
+
+</body>
+</html>
