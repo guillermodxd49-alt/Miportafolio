@@ -236,10 +236,6 @@ strong { color: var(--texto); }
 .hero-datos li { display: inline-flex; align-items: center; gap: .45rem; }
 .hero-datos svg { width: 1.05rem; height: 1.05rem; color: var(--acento); }
 
-/* Botón de WhatsApp (en claro usa el rojo de la paleta; en oscuro, verde) */
-.btn-whatsapp { margin-top: .25rem; }
-.btn-contacto-whatsapp { margin-top: 1.5rem; }
-
 /* ---------- 6. SOBRE MÍ ---------- */
 .sobre-grid { display: grid; gap: 2.5rem; }
 .sobre-grid p:not(.eyebrow):not(.section-bajada) { color: var(--texto-suave); margin-top: 1rem; }
