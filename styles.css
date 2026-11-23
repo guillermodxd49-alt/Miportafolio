@@ -229,7 +229,6 @@ strong { color: var(--texto); }
   letter-spacing: -.045em; font-weight: 800; margin-bottom: 1rem;
   overflow-wrap: break-word; text-wrap: balance;
 }
-.hero-y { color: var(--acento); }
 .hero-profesion { color: var(--acento); font-weight: 700; margin-bottom: 1rem; }
 .hero-frase { color: var(--texto-suave); font-size: 1.12rem; max-width: 52ch; }
 .hero-acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
