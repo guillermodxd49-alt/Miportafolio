@@ -1,7 +1,7 @@
 /* ============================================================
    PORTFOLIO — script.js (JavaScript puro, sin librerías)
    Funciones: tema claro/oscuro, menú móvil, navegación activa,
-   animaciones de entrada, formulario y enlaces pendientes.
+   animaciones, formulario con Formspree y lightbox accesible.
    ============================================================ */
 (function () {
   'use strict';
@@ -35,8 +35,8 @@
 
   function actualizarTema() {
     const oscuro = esOscuro();
+    // La etiqueta queda fija: aria-pressed comunica el estado.
     botonTema.setAttribute('aria-pressed', String(oscuro));
-    botonTema.setAttribute('aria-label', oscuro ? 'Activar modo claro' : 'Activar modo oscuro');
     botonTema.title = oscuro ? 'Activar modo claro' : 'Activar modo oscuro';
     if (metaColor) metaColor.setAttribute('content', oscuro ? '#0d0d0f' : '#f7f5f3');
   }
@@ -108,10 +108,19 @@
   marcarSeccion('inicio'); // Estado inicial al cargar la página
 
   if ('IntersectionObserver' in window) {
+    const seccionesVisibles = new Set();
     const observadorNav = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (entrada) {
-        if (entrada.isIntersecting) marcarSeccion(entrada.target.id);
+        if (entrada.isIntersecting) seccionesVisibles.add(entrada.target.id);
+        else seccionesVisibles.delete(entrada.target.id);
       });
+
+      // Se limpia antes de marcar para no dejar un enlace "activo" obsoleto
+      enlacesNav.forEach(function (enlace) { enlace.removeAttribute('aria-current'); });
+      const actual = Object.keys(enlacesPorId).find(function (id) {
+        return seccionesVisibles.has(id);
+      });
+      if (actual) enlacesPorId[actual].setAttribute('aria-current', 'location');
     }, { rootMargin: '-45% 0px -50% 0px' });
 
     document.querySelectorAll('main section[id]').forEach(function (seccion) {
@@ -137,33 +146,184 @@
     elementosRevelar.forEach(function (elemento) { elemento.classList.add('is-visible'); });
   }
 
-  /* ---------- 5. FORMULARIO DE CONTACTO ---------- */
+  /* ---------- 5. FORMULARIO DE CONTACTO (FORMSPREE) ---------- */
   const formulario = document.getElementById('form-contacto');
   const estadoFormulario = document.getElementById('form-estado');
-  const CORREO = 'guillermosesion12@gmail.com'; // CAMBIAR si cambia tu email
+  const botonEnviar = document.getElementById('form-enviar');
+  const TEXTO_BOTON = botonEnviar.textContent;
+  const PLACEHOLDER_ENDPOINT = '[COMPLETAR';
+  let enviando = false;
 
+  function mostrarEstado(mensaje, tipo) {
+    estadoFormulario.textContent = mensaje;
+    estadoFormulario.classList.remove('form-estado--ok', 'form-estado--error');
+    if (tipo) estadoFormulario.classList.add('form-estado--' + tipo);
+  }
+
+  const camposValidar = [
+    { el: document.getElementById('nombre'), mensaje: 'Ingresá tu nombre.' },
+    { el: document.getElementById('email'), mensaje: 'Ingresá un email válido.' },
+    { el: document.getElementById('mensaje'), mensaje: 'Contame un poco más (mínimo 10 caracteres).' }
+  ];
+
+  function limpiarError(campo) {
+    campo.removeAttribute('aria-invalid');
+    campo.removeAttribute('aria-describedby');
+    const error = campo.parentNode.querySelector('.campo-error');
+    if (error) error.remove();
+  }
+
+  function marcarError(campo, mensaje) {
+    campo.setAttribute('aria-invalid', 'true');
+    const id = 'error-' + campo.id;
+    campo.setAttribute('aria-describedby', id);
+    let error = campo.parentNode.querySelector('.campo-error');
+    if (!error) {
+      error = document.createElement('p');
+      error.className = 'campo-error';
+      error.id = id;
+      campo.parentNode.appendChild(error);
+    }
+    error.textContent = mensaje;
+  }
+
+  //EDITAR AQUÍ: reemplaza el endpoint de ejemplo en data-endpoint de index.html
   formulario.addEventListener('submit', function (evento) {
-    evento.preventDefault(); // Evita el envío mailto básico del atributo action
+    evento.preventDefault();
 
+    // Validación nativa + mensajes accesibles junto a cada campo
     if (!formulario.checkValidity()) {
+      camposValidar.forEach(function (item) {
+        const demasiadoCorto = item.el.id === 'mensaje' && item.el.value.trim().length < 10;
+        if (!item.el.validity.valid || demasiadoCorto) marcarError(item.el, item.mensaje);
+        else limpiarError(item.el);
+      });
       formulario.reportValidity();
+      mostrarEstado('Revisá los campos marcados antes de enviar.', 'error');
       return;
     }
 
-    const nombre = document.getElementById('nombre').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const mensaje = document.getElementById('mensaje').value.trim();
+    const endpoint = (formulario.dataset.endpoint || '').trim();
+    if (!endpoint || endpoint.indexOf(PLACEHOLDER_ENDPOINT) !== -1) {
+      mostrarEstado('Falta configurar el endpoint de Formspree (data-endpoint) en index.html.', 'error');
+      return;
+    }
 
-    const asunto = 'Mensaje desde el portfolio: ' + nombre;
-    const cuerpo = 'Nombre: ' + nombre + '\nEmail: ' + email + '\n\n' + mensaje;
-    const enlace = 'mailto:' + CORREO + '?subject=' + encodeURIComponent(asunto) +
-                   '&body=' + encodeURIComponent(cuerpo);
+    // El honeypot va en el cuerpo: si un bot lo completa, no se envía nada
+    const datos = new FormData(formulario);
+    if (datos.get('_gotcha')) {
+      mostrarEstado('Mensaje enviado. Gracias por escribirme.', 'ok');
+      formulario.reset();
+      return;
+    }
 
-    estadoFormulario.textContent = 'Se está abriendo tu correo. Si no se abre, escribime directamente a ' + CORREO;
-    window.location.href = enlace;
+    if (enviando) return;
+    enviando = true;
+    camposValidar.forEach(function (item) { limpiarError(item.el); });
+
+    // No se deshabilita el botón: así no se pierde el foco del teclado
+    botonEnviar.setAttribute('aria-disabled', 'true');
+    botonEnviar.textContent = 'Enviando…';
+    formulario.setAttribute('aria-busy', 'true');
+    mostrarEstado('Enviando mensaje…');
+
+    const control = typeof AbortController === 'function' ? new AbortController() : null;
+    const temporizador = control ? setTimeout(function () { control.abort(); }, 15000) : null;
+
+    fetch(endpoint, {
+      method: 'POST',
+      body: datos,
+      headers: { 'Accept': 'application/json' },
+      signal: control ? control.signal : undefined
+    }).then(function (respuesta) {
+      if (!respuesta.ok) throw new Error('Error del servidor: ' + respuesta.status);
+      mostrarEstado('¡Listo! Tu mensaje llegó. Gracias por escribirme.', 'ok');
+      formulario.reset();
+      camposValidar.forEach(function (item) { limpiarError(item.el); });
+    }).catch(function (error) {
+      console.error('No se pudo enviar el formulario:', error);
+      mostrarEstado(error.name === 'AbortError'
+        ? 'Se agotó el tiempo de espera. Intentá de nuevo o escribime por WhatsApp.'
+        : 'No se pudo enviar el mensaje. Intentá de nuevo o escribime por WhatsApp.', 'error');
+    }).finally(function () {
+      if (temporizador) clearTimeout(temporizador);
+      enviando = false;
+      botonEnviar.removeAttribute('aria-disabled');
+      botonEnviar.textContent = TEXTO_BOTON;
+      formulario.removeAttribute('aria-busy');
+      botonEnviar.focus();
+    });
   });
 
-  /* ---------- 6. ENLACES PENDIENTES DE COMPLETAR ---------- */
+  // Quita el error del campo en cuanto la persona lo corrige
+  camposValidar.forEach(function (item) {
+    item.el.addEventListener('input', function () {
+      if (item.el.validity.valid) limpiarError(item.el);
+      if (estadoFormulario.classList.contains('form-estado--error')) mostrarEstado('');
+    });
+  });
+
+  /* ---------- 6. LIGHTBOX ACCESIBLE ---------- */
+  const lightbox = document.getElementById('lightbox');
+  const imagenLightbox = document.getElementById('lightbox-img');
+  const tituloLightbox = document.getElementById('lightbox-caption');
+  const botonCerrar = document.getElementById('lightbox-cerrar');
+  let botonQueAbrio = null;
+
+  function abrirLightbox(boton) {
+    botonQueAbrio = boton;
+    imagenLightbox.src = boton.dataset.src;
+    imagenLightbox.alt = boton.dataset.alt || '';
+    const ancho = Number(boton.dataset.width);
+    const alto = Number(boton.dataset.height);
+    if (ancho > 0 && alto > 0) {
+      imagenLightbox.width = ancho;
+      imagenLightbox.height = alto;
+    }
+    tituloLightbox.textContent = boton.dataset.caption || '';
+    if (typeof lightbox.showModal === 'function') lightbox.showModal();
+    else lightbox.setAttribute('open', '');
+    botonCerrar.focus();
+  }
+
+  document.querySelectorAll('[data-lightbox]').forEach(function (boton) {
+    boton.addEventListener('click', function () { abrirLightbox(boton); });
+  });
+
+  function finalizarCierre() {
+    if (botonQueAbrio) {
+      botonQueAbrio.focus();
+      botonQueAbrio = null;
+    }
+    // Mantiene una imagen válida (transparente) cuando está cerrado
+    imagenLightbox.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    imagenLightbox.alt = '';
+    tituloLightbox.textContent = '';
+  }
+
+  function cerrarLightbox() {
+    if (typeof lightbox.close === 'function' && lightbox.open) lightbox.close();
+    else {
+      lightbox.removeAttribute('open');
+      finalizarCierre(); // El fallback no dispara el evento "close"
+    }
+  }
+
+  botonCerrar.addEventListener('click', cerrarLightbox);
+
+  lightbox.addEventListener('click', function (evento) {
+    // Cerrar al tocar el fondo oscuro (no la imagen ni el botón)
+    if (evento.target === lightbox) cerrarLightbox();
+  });
+
+  // Esc funciona también en navegadores sin soporte completo de <dialog>
+  document.addEventListener('keydown', function (evento) {
+    if (evento.key === 'Escape' && lightbox.open) cerrarLightbox();
+  });
+
+  lightbox.addEventListener('close', finalizarCierre);
+
+  /* ---------- 7. ENLACES PENDIENTES DE COMPLETAR ---------- */
   const estadoPie = document.getElementById('footer-estado');
 
   document.querySelectorAll('[data-placeholder]').forEach(function (enlace) {
@@ -174,10 +334,8 @@
       enlace.title = aviso;
 
       if (enlace.closest('.site-footer')) {
-        // En el pie ya existe una región de estado: la reutilizamos
         estadoPie.textContent = aviso;
       } else {
-        // En las tarjetas mostramos el aviso junto al botón (un solo anuncio)
         let avisoLocal = enlace.parentNode.querySelector('.aviso-inline');
         if (!avisoLocal) {
           avisoLocal = document.createElement('p');
@@ -190,6 +348,6 @@
     });
   });
 
-  /* ---------- 7. AÑO DEL PIE DE PÁGINA ---------- */
+  /* ---------- 8. AÑO DEL PIE DE PÁGINA ---------- */
   document.getElementById('anio').textContent = String(new Date().getFullYear());
 })();

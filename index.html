@@ -3,11 +3,13 @@
   ============================================================
   PORTFOLIO PERSONAL — index.html
   ============================================================
-  CAMBIOS RÁPIDOS (busca con Ctrl+F):
-  Número de WhatsApp        -> +54 9 3764 589570 (wa.me/5493764589570)
-  assets/*                  -> reemplaza por tus propias imágenes
+  EDITAR AQUÍ (busca con Ctrl+F): todos los [COMPLETAR: ...] son datos
+  pendientes y aparecen también visibles en la página.
 
-  Estructura de archivos (todos juntos en la misma carpeta):
+  Datos ya confirmados: Tiago Leiva · Posadas, Misiones, Argentina ·
+  WhatsApp, LinkedIn y GitHub: los enlaces que ya estaban en el sitio.
+
+  Estructura de archivos:
   index.html | styles.css | script.js
   assets/mi-logo.jpg
   assets/soundheritage-logo.jpg
@@ -15,70 +17,114 @@
   assets/soundheritage-admin-clientes.png
   assets/soundheritage-admin-empleados.png
 -->
-<html lang="es">
+<html lang="es-AR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ===== SEO BÁSICO: cambia estos textos por los tuyos ===== -->
-  <title>Leiva Tiago Guillermo | Desarrollo web y sistemas internos</title>
-  <meta name="description" content="Portfolio de desarrollo web y sistemas internos. Sitios web y herramientas de gestión construidas con Laravel, PHP, Filament, MySQL, HTML, CSS y JavaScript. Ubicado en Posadas, Argentina.">
+  <!-- ===== SEO BÁSICO ===== -->
+  <title>Tiago Leiva | Desarrollo web y sistemas internos</title>
+  <meta name="description" content="Tiago Leiva, desarrollador web en Posadas, Misiones. Sitios web y sistemas internos con Laravel, PHP, Filament, MySQL, HTML, CSS y JavaScript. Trabajo remoto.">
   <meta name="robots" content="index, follow">
-  <!-- Si publicas con GitHub Pages/Netlify, reemplaza esta URL por la real: -->
-  <!-- <link rel="canonical" href="https://TU-USUARIO.github.io/TU-REPOSITORIO/"> -->
+  <meta name="author" content="Tiago Leiva">
+  <!-- EDITAR AQUÍ: reemplaza por la URL pública cuando publiques -->
+  <link rel="canonical" href="[COMPLETAR: URL pública del sitio]">
 
   <!-- ===== OPEN GRAPH / REDES SOCIALES ===== -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
-  <meta property="og:site_name" content="Portfolio — Leiva Tiago Guillermo">
-  <meta property="og:title" content="Leiva Tiago Guillermo | Portfolio">
-  <meta property="og:description" content="Desarrollo de sitios web y sistemas internos con Laravel, PHP, Filament y MySQL.">
-  <meta property="og:url" content="[URL_DE_TU_WEB_AQUÍ]">
-  <meta property="og:image" content="[URL_DE_TU_IMAGEN_AQUÍ]">
+  <meta property="og:site_name" content="Portfolio — Tiago Leiva">
+  <meta property="og:title" content="Tiago Leiva | Portfolio">
+  <meta property="og:description" content="Sitios web y sistemas internos con Laravel, PHP, Filament y MySQL. Trabajo remoto desde Posadas, Argentina.">
+  <meta property="og:url" content="[COMPLETAR: URL pública del sitio]">
+  <meta property="og:image" content="[COMPLETAR: URL absoluta de la imagen de portada 1200x630]">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Portfolio de Tiago Leiva — desarrollo web y sistemas internos">
+
+  <!-- ===== TWITTER CARD ===== -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tiago Leiva | Portfolio">
+  <meta name="twitter:description" content="Sitios web y sistemas internos con Laravel, PHP, Filament y MySQL. Trabajo remoto desde Posadas, Argentina.">
+  <meta name="twitter:image" content="[COMPLETAR: misma URL absoluta de og:image]">
+  <meta name="twitter:image:alt" content="Portfolio de Tiago Leiva — desarrollo web y sistemas internos">
+  <meta name="twitter:creator" content="[COMPLETAR: usuario de X/Twitter, si tenés]">
 
   <!-- Color de la barra del navegador (lo actualiza script.js según el tema) -->
   <meta name="theme-color" content="#f7f5f3">
 
-  <!-- Icono de pestaña (no necesitas archivo extra) -->
   <link rel="icon" type="image/jpeg" href="assets/mi-logo.jpg">
 
-  <!-- ===== FUENTES (único recurso externo permitido) ===== -->
+  <!-- ===== DATOS ESTRUCTURADOS (Person) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tiago Leiva",
+    "jobTitle": "Desarrollador web",
+    "description": "Desarrollo sitios web y sistemas internos con Laravel, PHP, Filament, MySQL, HTML, CSS y JavaScript.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Posadas",
+      "addressRegion": "Misiones",
+      "addressCountry": "AR"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/tiago-guillermo-leiva/",
+      "https://github.com/guishealfa"
+    ],
+    "knowsAbout": ["Laravel", "PHP", "Filament", "MySQL", "HTML", "CSS", "JavaScript"]
+  }
+  </script>
+
+  <!-- ===== FUENTES (único recurso externo, ya usado antes) ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Evita el destello de tema incorrecto: se aplica antes de cargar el CSS -->
+  <script>
+    (function () {
+      try {
+        var tema = localStorage.getItem('portfolio-tema');
+        if (tema === 'dark' || tema === 'light') document.documentElement.dataset.theme = tema;
+        var oscuro = tema === 'dark' || (!tema && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta && oscuro) meta.setAttribute('content', '#0d0d0f');
+      } catch (e) { /* modo privado */ }
+    })();
+  </script>
 
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 
 <body>
-  <!-- Enlace de acceso: aparece al presionar Tab -->
   <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
   <!-- ============================================================
-       1. ENCABEZADO + NAVEGACIÓN FIJA
-       ============================================================ -->
+        1. ENCABEZADO + NAVEGACIÓN FIJA
+        ============================================================ -->
   <header class="site-header" id="top">
     <div class="container header-inner">
 
       <a class="brand" href="#inicio">
         <span class="brand-mark" aria-hidden="true"><img src="assets/mi-logo.jpg" alt="" width="512" height="512"></span>
-        <!-- Texto corto para el menú. El nombre completo está en el Hero. -->
-        <span class="brand-name">Leiva Tiago Guillermo</span>
+        <span class="brand-name">Tiago Leiva</span>
       </a>
 
       <nav class="site-nav" id="nav-principal" aria-label="Navegación principal">
         <ul>
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#habilidades">Habilidades</a></li>
           <li><a href="#trabajos">Trabajos</a></li>
+          <li><a href="#como-trabajo">Cómo trabajo</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
 
       <div class="header-acciones">
-        <!-- Botón directo a WhatsApp en el encabezado -->
         <a class="btn-whatsapp-header"
            href="https://wa.me/5493764589570?text=hola%20vengo%20de%20la%20web"
            target="_blank" rel="noopener noreferrer"
@@ -90,9 +136,8 @@
           <span>WhatsApp</span>
         </a>
 
-        <!-- Botón de tema: el texto visible cambia con JS -->
         <button class="icon-btn theme-toggle" id="theme-toggle" type="button"
-                aria-pressed="false" aria-label="Activar modo oscuro" title="Cambiar tema">
+                aria-pressed="false" aria-label="Modo oscuro" title="Cambiar tema">
           <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
@@ -104,7 +149,6 @@
           </svg>
         </button>
 
-        <!-- Menú hamburguesa: solo se ve en pantallas pequeñas -->
         <button class="icon-btn menu-toggle" id="menu-toggle" type="button"
                 aria-controls="nav-principal" aria-expanded="false" aria-label="Abrir menú">
           <span class="menu-bars" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -114,43 +158,51 @@
     </div>
   </header>
 
-  <main id="contenido">
+  <main id="contenido" tabindex="-1">
 
     <!-- ============================================================
-         2. HERO
-         ============================================================ -->
+          2. HERO
+          ============================================================ -->
     <section class="hero section" id="inicio" aria-labelledby="hero-titulo">
       <div class="container hero-grid">
 
         <div class="hero-texto reveal">
           <p class="eyebrow"><span class="punto" aria-hidden="true"></span> Hola, soy</p>
 
-          <h1 id="hero-titulo">Leiva Tiago Guillermo</h1>
+          <h1 id="hero-titulo">Tiago Leiva</h1>
+
+          <p class="disponibilidad">
+            <span class="disponibilidad__punto" aria-hidden="true"></span>
+            Disponible para nuevos proyectos
+          </p>
 
           <p class="hero-profesion">Desarrollo web y sistemas internos</p>
 
           <p class="hero-frase">
             Creo sitios web y herramientas de gestión que hacen más simple el trabajo
             de las personas, combinando diseño cuidado con código que funciona.
+            Trabajo de forma remota desde Posadas, Misiones, Argentina.
           </p>
 
           <div class="hero-acciones">
             <a class="btn btn-primary" href="#trabajos">Ver mis trabajos</a>
             <a class="btn btn-outline" href="#contacto">Hablemos</a>
+            <a class="btn btn-outline" href="#" data-placeholder="CV">Descargar CV</a>
           </div>
+          <p class="hero-nota">[COMPLETAR: ruta del CV en PDF, ej. assets/tiago-leiva-cv.pdf]</p>
+
+          <dl class="stats" aria-label="Datos destacados">
+            <div><dt>Años de experiencia</dt><dd>[COMPLETAR: años]</dd></div>
+            <div><dt>Proyectos entregados</dt><dd>[COMPLETAR: cantidad]</dd></div>
+            <div><dt>Tecnologías principales</dt><dd>7</dd></div>
+          </dl>
 
           <ul class="hero-datos" aria-label="Datos principales">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle>
               </svg>
-              Posadas, Argentina
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M4 4h6l2 5-3 2a12 12 0 0 0 4 4l2-3 5 2v6a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"></path>
-              </svg>
-              3764-589570
+              Posadas, Misiones, Argentina · Remoto
             </li>
           </ul>
         </div>
@@ -159,24 +211,33 @@
     </section>
 
     <!-- ============================================================
-         3. SOBRE MÍ
-         ============================================================ -->
+          3. SOBRE MÍ
+          ============================================================ -->
     <section class="section section-alt" id="sobre-mi" aria-labelledby="sobre-titulo">
       <div class="container sobre-grid">
 
-        <div class="reveal">
-          <p class="eyebrow">Un poco sobre mí</p>
+        <div class="sobre-texto reveal">
           <h2 class="section-titulo" id="sobre-titulo">Sobre mí</h2>
           <p class="section-bajada">
-            Soy desarrollador web, vivo en <strong>Posadas, Argentina</strong> y trabajo
+            Soy desarrollador web, vivo en <strong>Posadas, Misiones, Argentina</strong> y trabajo
             de forma remota con clientes de cualquier lugar.
           </p>
           <p>
-            Tengo experiencia previa realizando webs y conexiones con sistemas de gestión
-            interna; me especializo en esas dos áreas principales. Soy una persona
-            comprometida con su trabajo que siempre trata de brindar lo mejor para cada cliente.
+            Construyo sitios web y sistemas internos con <strong>Laravel, PHP, Filament, MySQL,
+            HTML, CSS y JavaScript</strong>. [COMPLETAR: años de experiencia y tipos de proyectos
+            que realizaste, con un ejemplo concreto].
           </p>
-          <!-- OPCIONAL: agrega aquí tus años de experiencia, estudios o cursos. -->
+          <p>
+            Me encargo de [COMPLETAR: tareas concretas que hacés, ej. relevamiento, diseño,
+            desarrollo, pruebas y despliegue]. Mantengo comunicación clara, seguimiento del
+            trabajo y atención al detalle en cada entrega; [COMPLETAR: ejemplo concreto de ese
+            compromiso, ej. actualizaciones periódicas y revisiones incluidas].
+          </p>
+
+          <figure class="sobre-foto">
+            <div class="sobre-foto__marco">[COMPLETAR: ruta de tu foto, ej. assets/tiago.jpg]</div>
+            <figcaption>[COMPLETAR: pie de foto concreto, ej. "Trabajando en el panel de Sound Heritage"]</figcaption>
+          </figure>
         </div>
 
         <div class="sobre-tarjetas reveal">
@@ -190,20 +251,49 @@
             <h3>Sistemas internos</h3>
             <p>Paneles de gestión y conexiones con bases de datos MySQL usando Laravel y Filament.</p>
           </article>
-          <article class="info-card">
-            <span class="info-icono" aria-hidden="true">03</span>
-            <h3>Compromiso</h3>
-            <p>Comunicación clara, seguimiento del trabajo y atención al detalle en cada entrega.</p>
-          </article>
         </div>
 
       </div>
     </section>
 
     <!-- ============================================================
-         4. MIS TRABAJOS
-         ============================================================ -->
-    <section class="section" id="trabajos" aria-labelledby="trabajos-titulo">
+          4. HABILIDADES
+          ============================================================ -->
+    <section class="section" id="habilidades" aria-labelledby="habilidades-titulo">
+      <div class="container">
+        <header class="section-cabecera reveal">
+          <div>
+            <p class="eyebrow">Lo que manejo</p>
+            <h2 class="section-titulo" id="habilidades-titulo">Habilidades</h2>
+          </div>
+          <p class="section-bajada">Tecnologías que uso para llevar un proyecto desde la idea hasta el despliegue.</p>
+        </header>
+
+        <div class="habilidades-grid">
+          <article class="skill-group reveal">
+            <h3>Backend</h3>
+            <ul class="tags"><li>Laravel</li><li>PHP</li><li>Filament</li></ul>
+          </article>
+          <article class="skill-group reveal">
+            <h3>Frontend</h3>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </article>
+          <article class="skill-group reveal">
+            <h3>Base de datos</h3>
+            <ul class="tags"><li>MySQL</li></ul>
+          </article>
+          <article class="skill-group reveal">
+            <h3>Herramientas</h3>
+            <ul class="tags"><li>Git</li><li>GitHub</li><li>[COMPLETAR: otras herramientas]</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+          5. MIS TRABAJOS
+          ============================================================ -->
+    <section class="section section-alt" id="trabajos" aria-labelledby="trabajos-titulo">
       <div class="container">
 
         <header class="section-cabecera reveal">
@@ -211,22 +301,68 @@
             <p class="eyebrow">Lo que hago</p>
             <h2 class="section-titulo" id="trabajos-titulo">Mis trabajos</h2>
           </div>
-          <p class="section-bajada">Proyectos web y sistemas internos desarrollados con tecnologías del stack PHP/Laravel.</p>
+          <p class="section-bajada">Casos de estudio y proyectos web y sistemas internos del stack PHP/Laravel.</p>
         </header>
 
         <div class="proyectos-grid">
 
-          <!-- ===== PROYECTO 1: sitio web de Sound Heritage ===== -->
-          <article class="proyecto-card reveal">
+          <!-- ===== CASO DE ESTUDIO: SOUND HERITAGE ===== -->
+          <article class="proyecto-card proyecto-card--caso reveal">
             <div class="proyecto-img proyecto-img--logo">
               <img src="assets/soundheritage-logo.jpg" alt="Logo de Sound Heritage" loading="lazy" decoding="async" width="1200" height="323">
             </div>
             <div class="proyecto-cuerpo">
-              <p class="proyecto-tipo">Sitio web</p>
-              <h3>Sitio web de Sound Heritage</h3>
-              <p>Desarrollo de sitio web con PHP y Laravel, HTML, CSS y JavaScript, usando MySQL como base de datos.</p>
+              <p class="proyecto-tipo">Caso de estudio · Sitio web + sistema interno</p>
+              <h3>Sound Heritage</h3>
+              <p>Sitio web y panel de administración con Laravel, Filament y MySQL.</p>
+
+              <div class="caso-bloques">
+                <div class="caso-bloque">
+                  <h4>Problema</h4>
+                  <p>[COMPLETAR: problema concreto que tenían antes del proyecto]</p>
+                </div>
+                <div class="caso-bloque">
+                  <h4>Mi rol</h4>
+                  <p>[COMPLETAR: qué hiciste exactamente y en qué etapas participaste]</p>
+                </div>
+                <div class="caso-bloque">
+                  <h4>Solución</h4>
+                  <p>[COMPLETAR: cómo resolviste el problema y qué tecnologías usaste]</p>
+                </div>
+                <div class="caso-bloque">
+                  <h4>Resultado</h4>
+                  <p>[COMPLETAR: resultado concreto y verificable, sin cifras inventadas]</p>
+                </div>
+              </div>
+
+              <!-- EDITAR AQUÍ: Difuminar o anonimizar datos reales de clientes y empleados antes de publicar -->
+              <div class="proyecto-galeria" role="group" aria-label="Capturas del sistema interno. Hacé clic para ampliar.">
+                <button class="galeria-item" type="button" data-lightbox
+                        data-src="assets/soundheritage-admin-clientes.png"
+                        data-alt="Listado del panel de administración de Sound Heritage"
+                        data-caption="Listado del panel de administración"
+                        data-width="1366" data-height="691">
+                  <img src="assets/soundheritage-admin-clientes.png" alt="Listado del panel de administración de Sound Heritage" loading="lazy" decoding="async" width="1366" height="691">
+                </button>
+                <button class="galeria-item" type="button" data-lightbox
+                        data-src="assets/soundheritage-dashboard.png"
+                        data-alt="Panel de escritorio con métricas del sistema interno"
+                        data-caption="Panel de escritorio con métricas"
+                        data-width="1364" data-height="651">
+                  <img src="assets/soundheritage-dashboard.png" alt="Panel de escritorio con métricas del sistema interno" loading="lazy" decoding="async" width="1364" height="651">
+                </button>
+                <button class="galeria-item" type="button" data-lightbox
+                        data-src="assets/soundheritage-admin-empleados.png"
+                        data-alt="Listado de empleados del sistema interno"
+                        data-caption="Listado de empleados"
+                        data-width="1366" data-height="651">
+                  <img src="assets/soundheritage-admin-empleados.png" alt="Listado de empleados del sistema interno" loading="lazy" decoding="async" width="1366" height="651">
+                </button>
+              </div>
+              <p class="galeria-pista">Hacé clic en una captura para ampliarla. Se cierra con Esc. [COMPLETAR: difuminar o anonimizar datos reales antes de publicar]</p>
+
               <ul class="tags" aria-label="Tecnologías utilizadas">
-                <li>Laravel</li><li>PHP</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>MySQL</li>
+                <li>Laravel</li><li>PHP</li><li>Filament</li><li>MySQL</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
               </ul>
               <a class="btn btn-small" href="https://soundheritage.duckdns.org/" target="_blank" rel="noopener noreferrer"
                  aria-label="Ver proyecto: Sitio web de Sound Heritage (se abre en pestaña nueva)">
@@ -236,26 +372,24 @@
             </div>
           </article>
 
-          <!-- ===== PROYECTO 2: sistema interno (3 capturas reales) ===== -->
-          <article class="proyecto-card reveal">
-            <div class="proyecto-img proyecto-galeria">
-              <img src="assets/soundheritage-admin-clientes.png" alt="Listado del panel de administración de Sound Heritage" loading="lazy" decoding="async" width="1366" height="691">
-              <img src="assets/soundheritage-dashboard.png" alt="Panel de escritorio con métricas y ventas del sistema interno" loading="lazy" decoding="async" width="1364" height="651">
-              <img src="assets/soundheritage-admin-empleados.png" alt="Listado de empleados del sistema interno" loading="lazy" decoding="async" width="1366" height="651">
-            </div>
+          <!-- ===== PROYECTOS PENDIENTES ===== -->
+          <article class="proyecto-card proyecto-pendiente reveal">
+            <div class="proyecto-img proyecto-img--pendiente">[PROYECTO PENDIENTE · COMPLETAR: captura]</div>
             <div class="proyecto-cuerpo">
-              <p class="proyecto-tipo">Sistema interno</p>
-              <h3>Panel de administración</h3>
-              <p>Sistema interno de gestión implementado con Laravel y Filament, conectado a MySQL.</p>
-              <ul class="tags" aria-label="Tecnologías utilizadas">
-                <li>Laravel</li><li>Filament</li><li>MySQL</li>
-              </ul>
-              <!-- Nota: este enlace puede pedir usuario y contraseña. -->
-              <a class="btn btn-small" href="https://soundheritage.duckdns.org/admin/customers" target="_blank" rel="noopener noreferrer"
-                 aria-label="Ver proyecto: Panel de administración (se abre en pestaña nueva)">
-                Ver proyecto <span class="sr-only">(se abre en una pestaña nueva)</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
-              </a>
+              <p class="proyecto-tipo">[COMPLETAR: tipo de proyecto]</p>
+              <h3>[PROYECTO PENDIENTE: nombre]</h3>
+              <p>[COMPLETAR: problema, tu rol y resultado del proyecto]</p>
+              <ul class="tags"><li>[COMPLETAR: tecnologías]</li></ul>
+            </div>
+          </article>
+
+          <article class="proyecto-card proyecto-pendiente reveal">
+            <div class="proyecto-img proyecto-img--pendiente">[PROYECTO PENDIENTE · COMPLETAR: captura]</div>
+            <div class="proyecto-cuerpo">
+              <p class="proyecto-tipo">[COMPLETAR: tipo de proyecto]</p>
+              <h3>[PROYECTO PENDIENTE: nombre]</h3>
+              <p>[COMPLETAR: problema, tu rol y resultado del proyecto]</p>
+              <ul class="tags"><li>[COMPLETAR: tecnologías]</li></ul>
             </div>
           </article>
 
@@ -264,9 +398,57 @@
     </section>
 
     <!-- ============================================================
-         5. CONTACTO
-         ============================================================ -->
-    <section class="section section-alt" id="contacto" aria-labelledby="contacto-titulo">
+          6. CÓMO TRABAJO
+          ============================================================ -->
+    <section class="section" id="como-trabajo" aria-labelledby="proceso-titulo">
+      <div class="container">
+        <header class="section-cabecera reveal">
+          <div>
+            <p class="eyebrow">El proceso</p>
+            <h2 class="section-titulo" id="proceso-titulo">Cómo trabajo</h2>
+          </div>
+          <p class="section-bajada">Cuatro pasos claros, sin sorpresas.</p>
+        </header>
+
+        <ol class="pasos">
+          <li class="paso reveal"><span class="paso-num" aria-hidden="true">01</span><h3>Contacto</h3><p>Charlamos sobre tu idea, el objetivo y el alcance. [COMPLETAR: canal y duración de la primera charla].</p></li>
+          <li class="paso reveal"><span class="paso-num" aria-hidden="true">02</span><h3>Propuesta</h3><p>Te paso una propuesta con alcance, plazos y [COMPLETAR: forma de presupuesto].</p></li>
+          <li class="paso reveal"><span class="paso-num" aria-hidden="true">03</span><h3>Desarrollo</h3><p>Construyo y te muestro avances. [COMPLETAR: frecuencia de actualizaciones y herramienta de seguimiento].</p></li>
+          <li class="paso reveal"><span class="paso-num" aria-hidden="true">04</span><h3>Entrega</h3><p>Probamos, corregimos y desplegamos. [COMPLETAR: qué incluye la entrega y el soporte posterior].</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+          7. TESTIMONIOS
+          ============================================================ -->
+    <section class="section section-alt" id="testimonios" aria-labelledby="testimonios-titulo">
+      <div class="container">
+        <header class="section-cabecera reveal">
+          <div>
+            <p class="eyebrow">Lo que dicen</p>
+            <h2 class="section-titulo" id="testimonios-titulo">Testimonios</h2>
+          </div>
+          <p class="section-bajada">[COMPLETAR: autorización para publicar testimonios y nombres].</p>
+        </header>
+
+        <div class="testimonios-grid">
+          <figure class="testimonio reveal">
+            <blockquote>[COMPLETAR: testimonio real, con una frase concreta sobre el trabajo]</blockquote>
+            <figcaption>[COMPLETAR: nombre y cargo de quien lo escribió]</figcaption>
+          </figure>
+          <figure class="testimonio reveal">
+            <blockquote>[COMPLETAR: segundo testimonio real, sin inventar textos]</blockquote>
+            <figcaption>[COMPLETAR: nombre y cargo de quien lo escribió]</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+          8. CONTACTO
+          ============================================================ -->
+    <section class="section" id="contacto" aria-labelledby="contacto-titulo">
       <div class="container contacto-grid">
 
         <div class="reveal">
@@ -280,27 +462,32 @@
               <div>
                 <span>Correo electrónico</span>
                 <a href="mailto:guillermosesion12@gmail.com">guillermosesion12@gmail.com</a>
+                <small>[COMPLETAR: correo profesional, si querés usar uno distinto]</small>
               </div>
             </li>
             <li>
               <span class="contacto-icono" aria-hidden="true">☎</span>
               <div>
                 <span>Teléfono / WhatsApp</span>
-                <!-- Verifica el código de país antes de publicar -->
-                <a href="tel:+543764589570">3764-589570</a>
+                <a href="tel:+5493764589570">3764-589570</a>
               </div>
             </li>
             <li>
               <span class="contacto-icono" aria-hidden="true">⌖</span>
-              <div><span>Ubicación</span><strong>Posadas, Argentina</strong></div>
+              <div><span>Ubicación</span><strong>Posadas, Misiones, Argentina · Remoto</strong></div>
+            </li>
+            <li>
+              <span class="contacto-icono" aria-hidden="true">◷</span>
+              <div><span>Tiempo de respuesta estimado</span><strong>[COMPLETAR: ej. dentro de 24 horas hábiles]</strong></div>
             </li>
           </ul>
         </div>
 
+        <!-- EDITAR AQUÍ: pegá tu endpoint de Formspree en data-endpoint -->
         <form class="formulario reveal" id="form-contacto"
-              action="mailto:guillermosesion12@gmail.com" method="post" enctype="text/plain">
+              data-endpoint="[COMPLETAR: endpoint de Formspree, ej. https://formspree.io/f/xxxxxxxx]">
           <h3>Enviame un mensaje</h3>
-          <p class="form-nota">Se abrirá tu aplicación de correo con el mensaje ya preparado.</p>
+          <p class="form-nota">[COMPLETAR: configurá el endpoint de Formspree en data-endpoint antes de publicar]. Respondo todos los mensajes.</p>
 
           <div class="campo">
             <label for="nombre">Nombre</label>
@@ -314,11 +501,18 @@
 
           <div class="campo">
             <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="5" required maxlength="1500" placeholder="Contame sobre tu proyecto..."></textarea>
+            <textarea id="mensaje" name="mensaje" rows="5" required minlength="10" maxlength="1500" placeholder="Contame sobre tu proyecto..."></textarea>
           </div>
 
-          <button class="btn btn-primary btn-block" type="submit">Enviar mensaje</button>
-          <p class="form-estado" id="form-estado" role="status"></p>
+          <!-- Honeypot anti-spam: invisible para personas, tentación para bots -->
+          <div class="honeypot" aria-hidden="true">
+            <label for="sitio-web">Dejá este campo vacío</label>
+            <input type="text" id="sitio-web" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+          <input type="hidden" name="_subject" value="Mensaje desde el portfolio de Tiago Leiva">
+
+          <button class="btn btn-primary btn-block" type="submit" id="form-enviar">Enviar mensaje</button>
+          <p class="form-estado" id="form-estado" role="status" aria-live="polite"></p>
         </form>
 
       </div>
@@ -327,44 +521,53 @@
   </main>
 
   <!-- ============================================================
-       6. PIE DE PÁGINA
-       ============================================================ -->
+        9. PIE DE PÁGINA
+        ============================================================ -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
         <a class="brand" href="#inicio">
           <span class="brand-mark" aria-hidden="true"><img src="assets/mi-logo.jpg" alt="" width="512" height="512"></span>
-          <span class="brand-name">Leiva Tiago Guillermo</span>
+          <span class="brand-name">Tiago Leiva</span>
         </a>
-        <p class="footer-texto">Desarrollo web y sistemas internos · Posadas, Argentina</p>
+        <p class="footer-texto">Desarrollo web y sistemas internos · Posadas, Misiones, Argentina</p>
       </div>
 
       <div>
         <h2 class="footer-titulo">Encontrame en</h2>
         <ul class="redes">
-          <li><a href="https://www.linkedin.com/in/tiago-guillermo-leiva/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="https://github.com/guishealfa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/tiago-guillermo-leiva/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
+          <li><a href="https://github.com/guishealfa" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
         </ul>
         <p class="form-estado" id="footer-estado" role="status"></p>
       </div>
 
       <div class="footer-final">
-        <p>© <span id="anio">2026</span> Leiva Tiago Guillermo</p>
+        <p>© <span id="anio">2026</span> Tiago Leiva</p>
         <a href="#top">Volver arriba ↑</a>
       </div>
     </div>
   </footer>
 
-  <!-- Botón flotante de WhatsApp: siempre accesible desde cualquier sección -->
+  <!-- Botón flotante de WhatsApp -->
   <a class="whatsapp-flotante"
      href="https://wa.me/5493764589570?text=hola%20vengo%20de%20la%20web"
      target="_blank" rel="noopener noreferrer"
-     aria-label="Abrir chat de WhatsApp" title="Escribime por WhatsApp">
+     aria-label="Abrir chat de WhatsApp (se abre en pestaña nueva)" title="Escribime por WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12.04 2a10 10 0 0 0-8.6 15.04L2 22l5.1-1.4A10 10 0 1 0 12.04 2zm0 18.2a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3 .79.8-2.93-.2-.31a8.2 8.2 0 1 1 6.88 3.77zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8-.23-.08-.4-.12-.57.12-.17.25-.65.8-.79.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.57-1.37-.78-1.88-.2-.5-.41-.43-.57-.44h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.78 2.71 4.31 3.8.6.26 1.07.42 1.44.54.6.19 1.15.16 1.58.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.28z"></path>
     </svg>
-    <span class="sr-only">Abrir chat de WhatsApp</span>
+    <span class="sr-only">(se abre en una pestaña nueva)</span>
   </a>
+
+  <!-- Lightbox accesible: <dialog> se cierra con Esc de forma nativa -->
+  <dialog class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada de la galería">
+    <figure>
+      <button class="lightbox__cerrar" type="button" id="lightbox-cerrar" aria-label="Cerrar imagen ampliada">×</button>
+      <img id="lightbox-img" alt="" width="1366" height="691" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+  </dialog>
 
 </body>
 </html>
