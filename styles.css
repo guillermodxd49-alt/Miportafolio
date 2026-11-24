@@ -178,6 +178,19 @@ strong { color: var(--texto); }
 
 .header-acciones { display: flex; align-items: center; gap: .4rem; margin-left: auto; }
 
+/* Botón de WhatsApp en el encabezado */
+.btn-whatsapp-header {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .5rem .75rem; border-radius: .6rem;
+  background: var(--acento-fuerte); color: var(--acento-texto);
+  font-size: .85rem; font-weight: 700; text-decoration: none;
+  transition: filter .2s ease, transform .2s ease;
+}
+.btn-whatsapp-header:hover { filter: brightness(1.08); color: var(--acento-texto); transform: translateY(-1px); }
+.btn-whatsapp-header:focus-visible { outline-color: var(--acento); }
+.btn-whatsapp-header svg { width: 1.05rem; height: 1.05rem; flex: none; }
+.btn-whatsapp-header span { display: none; } /* en móvil solo el icono */
+
 .icon-btn {
   display: grid; place-items: center; width: 2.5rem; height: 2.5rem;
   background: transparent; color: var(--texto); border: 1px solid var(--borde);
@@ -350,6 +363,8 @@ strong { color: var(--texto); }
   .site-nav a { padding: .5rem .8rem; }
   .menu-toggle, .js .menu-toggle { display: none; }
   .header-acciones { margin-left: 1.5rem; }
+  .btn-whatsapp-header { padding-inline: .9rem; }
+  .btn-whatsapp-header span { display: inline; }
   .section { padding-block: 6rem; }
   .hero { padding-block: 5rem 6rem; }
   .hero-texto { max-width: 46rem; }
