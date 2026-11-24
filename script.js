@@ -187,7 +187,7 @@
     error.textContent = mensaje;
   }
 
-  //EDITAR AQUÍ: reemplaza el endpoint de ejemplo en data-endpoint de index.html
+  // EDITAR AQUÍ: pegá el endpoint de Formspree real en data-endpoint de index.html
   formulario.addEventListener('submit', function (evento) {
     evento.preventDefault();
 
@@ -205,7 +205,7 @@
 
     const endpoint = (formulario.dataset.endpoint || '').trim();
     if (!endpoint || endpoint.indexOf(PLACEHOLDER_ENDPOINT) !== -1) {
-      mostrarEstado('Falta configurar el endpoint de Formspree (data-endpoint) en index.html.', 'error');
+      mostrarEstado('El formulario todavía no está habilitado. Escribime por WhatsApp o al correo tiagoguileiv@gmail.com y te respondo.', 'error');
       return;
     }
 
@@ -243,8 +243,8 @@
     }).catch(function (error) {
       console.error('No se pudo enviar el formulario:', error);
       mostrarEstado(error.name === 'AbortError'
-        ? 'Se agotó el tiempo de espera. Intentá de nuevo o escribime por WhatsApp.'
-        : 'No se pudo enviar el mensaje. Intentá de nuevo o escribime por WhatsApp.', 'error');
+        ? 'Se agotó el tiempo de espera. Escribime por WhatsApp o al correo tiagoguileiv@gmail.com.'
+        : 'No se pudo enviar el mensaje. Escribime por WhatsApp o al correo tiagoguileiv@gmail.com.', 'error');
     }).finally(function () {
       if (temporizador) clearTimeout(temporizador);
       enviando = false;
